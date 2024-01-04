@@ -1,0 +1,24 @@
+{              
+    
+    "make_default": true,
+    "replication_spooling_dir": "/tmp/verneuil/",
+    "replication_targets": [                                                     
+    {                                                                            
+        "s3": {
+          "region": "us-east-1",
+          "endpoint": "http://minio:9000",
+          "chunk_bucket": "chunks",
+          "manifest_bucket": "manifests",
+          "create_buckets_on_demand": true,
+          "domain_addressing": false  
+        }                                                               
+    },                                                                           
+    {                                                                            
+        "local" : {                                                              
+            "directory": "/tmp/verneuil-cache",                                  
+            "num_shards": 10,                                                    
+            "capacity": 1000                                                     
+        }                                                                        
+    }                                                                            
+    ]                                                                            
+}  
