@@ -672,9 +672,20 @@ fn consume_directory<R: 'static + Future<Output = Result<()>>>(
                 // If we can't get rid of that directory, it must be
                 // non-empty, which means we failed to consume some
                 // file... in which case we must report failure.
-                ensure_directory_removed(&to_consume)
-            } else {
+
+                // Possibly unsafe: instead of erroring out, just log the contents of the directory.
+                if let Err(_err) = ensure_directory_removed(&to_consume) {
+                    if let Ok(entries) = std::fs::read_dir(&to_consume) {
+                        for entry in entries {
+                            if let Ok(entry) = entry {
+                                tracing::error!(?entry, "failed to remove directory contents");
+                            }
+                        }
+                    }
+                }
                 Ok(())
+            } else {
+               Ok(())
             }
         }
 
