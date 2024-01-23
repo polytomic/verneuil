@@ -1358,7 +1358,7 @@ impl CopierWorker {
                         Ok(())
                     }))
                 },
-                ConsumeDirectoryPolicy::RemoveFilesAndDirectory,
+                ConsumeDirectoryPolicy::RemoveFiles,
                 &[],
             )?;
         }
@@ -1406,7 +1406,7 @@ impl CopierWorker {
                         Ok(())
                     }))
                 },
-                ConsumeDirectoryPolicy::RemoveFilesAndDirectory,
+                ConsumeDirectoryPolicy::RemoveFiles,
                 &[],
             )?;
 
